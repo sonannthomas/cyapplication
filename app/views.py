@@ -1,7 +1,7 @@
 import os
 
 from flask import render_template, flash, request, redirect, url_for, Response
-from . import app
+from app import app
 from werkzeug.utils import secure_filename
 
 from flask_wtf import Form
