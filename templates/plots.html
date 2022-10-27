@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'default.css') }}" />
+<link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-2.4.3.min.css">    
+<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>    
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.3.min.js"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.3.min.js"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.3.min.js"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-2.4.3.min.js"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-2.4.3.min.js"></script>    
+    
+    {{ js_resources|indent(4)|safe }}
+
+    {{ css_resources|indent(4)|safe }}
+
+    
+    <title>Data Plots</title>
+</head>
+
+<body>
+
+
+<div id="outer">
+
+<img href="{{ url_for('static', filename = 'images/a10.jpg') }}" alt="My image"/>
+
+
+	<div id="upbg"></div>
+
+	<div id="inner">
+
+		<div id="header">
+			<a href="#">
+			<h1>Cyclic Analysis Results</h1>
+			<a>
+		</div>
+	
+		<div id="splash"></div>
+	
+		<div id="menu">
+			<ul>
+				<li class="first"><a href="#dataplots">Data Plots</a></li>
+				<li ><a href="#outputdata">Output Data</a></li>
+				<li ><a href="#phaseplots">Phase Plots</a></li>
+				<li ><a href="#resultplots">Results Plots</a></li>								
+			</ul>
+		</div>
+		
+		<div class="primarycontent">
+		
+		<div class="post">
+				<div class="header">
+					<a name="dataplots"> </a> <h1> Data Plots, Normalized to {{ data.norm_type }} </h1>					
+				</div>
+				<div class="content">				
+					<br>
+				{{ data.data_div | safe }}
+				{{ data.data_script | safe }}
+				</div>				
+				<div class="footer">					
+				</div>				
+			</div>		
+
+		<br>
+		
+		<div class="post">
+				<div class="header"> <a name="outputdata"> </a> <h1>Analysis Data</h1> </div>
+				<div class="content">
+				<br>
+				<H2> Lead-Lag Matrix </H2>					
+				$$ A = \begin{bmatrix} {{ data.matrix_output | safe}} \end{bmatrix} $$
+				</div>		
+								
+				<div class="content">				
+				<H2> Signal Phase Order </H2>	
+				<br>
+				<ol id="chnperm" style="margin-left:5%;">
+				{% for item in data.channel_perm %}
+					<li class="printerfriendly">{{ item }} </li>
+				{% endfor %}
+				</ol>
+				</div>
+																	
+				<div class="footer">
+					
+				</div>				
+		</div>		
+		<br>
+			
+			<div class="post">
+				<div class="header">
+					<a name="phaseplots"> </a> <h1> Phase Plots </h1>					
+				</div>
+				
+				<div class="content">
+					<br>
+				{{ data.phase_div | safe }}
+				{{ data.phase_script | safe }}
+				</div>				
+				<div class="footer">					
+				</div>				
+			</div>		
+
+			
+			<div class="post">
+				<div class="header">
+					<a name="resultplots"> </a> <h1> Analysis Plots </h1>					
+				</div>
+				
+				<div class="content">
+					<br>
+				{{ data.analysis_div|safe }}
+				{{ data.analysis_script|safe }}
+				</div>				
+				<div class="footer">					
+				</div>				
+			</div>		
+	
+	
+		<div id="footer">
+			Design adapted and modified from <a href="http://www.nodethirtythree.com/">NodeThirtyThree</a>.
+		</div>
+
+	</div>
+	</div>
+</div>
+
+
+	
+    
+</body>
+</html> 

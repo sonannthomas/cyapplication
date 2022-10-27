@@ -1,0 +1,17 @@
+bokeh
+click
+Flask
+Flask-Uploads
+Flask-WTF
+gunicorn
+itsdangerous
+Jinja2
+MarkupSafe
+numpy
+python-dateutil
+PyYAML
+requests
+six
+tornado
+Werkzeug
+WTForms

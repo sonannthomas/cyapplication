@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+{% from "_formhelpers.html" import render_field %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cyclic Analysis Online Application</title>    
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'default.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'modal.css') }}" />
+</head>
+
+
+<body>
+
+<div id="outer">
+
+<img href="{{ url_for('static', filename = 'images/a10.jpg') }}" alt="My image"/>
+
+	<div id="upbg"></div>
+
+	<div id="inner">
+	
+		<div id="header">
+			<a>
+			<h1>Cyclic Analysis</h1>
+			<a>
+		</div>
+	
+		<div id="splash"></div>
+
+	
+		
+		<div id="menu">
+			<ul>
+				<li class="first"><a href="#upload">Data Plots</a></li>
+			</ul>
+		</div>
+		
+		
+		
+		<div class="post">
+				<div class="header"> <a name="upload"> </a> <h1>Upload a File</h1> </div>
+				Accepting comma separated text files with valid floating point values. 
+				Time series should be at least 30 taps long, and number of channels should not exceed 30.
+				
+				  
+		{% if error %}
+			<p><strong>Error:</strong> {{ error }}
+		{% endif %}
+		
+		
+				
+				<div class="content">
+				<br>
+				<form action="" method=post enctype=multipart/form-data>
+				
+				{{ form.file.label }}
+				{{ form.file(class_='mybutton')|safe }}			
+			
+				<br>
+				{{ form.norm_type.label }}
+				{{ form.norm_type(class_='mybutton')|safe }}
+				{% if form.norm_type.errors %}
+					<ul class=errors>
+					{% for error in form.norm_type.errors %}
+					<li>{{ error }}</li>
+					{% endfor %}
+					</ul>
+				{% endif %}  				
+
+				<br>
+				{{ form.trend_removal.label }}
+				{{ form.trend_removal(class_='mybutton')|safe }}
+				{% if form.trend_removal.errors %}
+					<ul class=errors>
+					{% for error in form.trend_removal.errors %}
+					<li>{{ error }}</li>
+					{% endfor %}
+					</ul>
+				{% endif %}  				
+				
+				
+				<br>
+				<input type=submit name='analyze' value=analyze class="mybutton">
+				<input type=submit name='report' value=report class="mybutton">				
+				
+				<div class="checkbox">
+				<label>
+					<input type="checkbox" name="colheader" value="True"> Column Headers ?
+				</label>
+				</div>
+	
+				</form>
+	
+				</div>		
+				<div class="footer">
+					
+				</div>				
+		</div>		
+
+
+		{{form.modal}}
+				
+		<div id="footer">
+			Design adapted and modified from <a href="http://www.nodethirtythree.com/">NodeThirtyThree</a>.
+		</div>
+
+	</div>
+
+</div>
+
+
+	
+    
+</body>
+</html> 
